@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<script src = "/socket.io/socket.io.js"></script>
+<script src="assets/js/jquery.js"></script>
+<script>
+  let socket = io.connect("http://localhost:8000");
+  let socketId;
+  socket.on("connect", () => {
+    socketId = socket.id;
+    setInterval(() => {
+      console.log("Keep Alive");
+      socket.emit("keepalive", socketId)
+    }, 1000);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Disconnecting... " + socketId);
+    socketId = undefined;
+  });
+
+  socket.on("alert", (data) => {
+    console.log(data);
+    $(".message").text("You seem to be inactive.. Are you encountering any problems?");
+    setTimeout(() => {
+      $(".message").text("");
+    }, 2000);
+  });
+</script>
+<body>
+  <div class="header">
+    <div class="header-title">Web Application Notifier</div>
+  </div>
+  <div class="body">
+    <div class="message"></div>
+    <button class="btn-action">CLICK ME!</button>
+  </div>
+</body>
+</html>
