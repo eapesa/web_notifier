@@ -23,23 +23,37 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/assets/index.html");
 });
 
-const sockets = {};
+const SOCKETS = {};
 io.on("connection", (socket) => {
   console.log("New socket connection " + socket.id);
-  sockets[socket.id] = 0;
+  SOCKETS[socket.id] = {
+    idle: 0,
+    press: 0
+  };
 
+  const THRESHOLDS = config.threshold;
+  console.log(THRESHOLDS);
   socket.on("keepalive", (data) => {
-    const THRESHOLD = config.sleep_threshold;
-    sockets[socket.id] += 1;
-    if (sockets[socket.id] >= THRESHOLD) {
-      console.log("Threshold is met. Inform client!");
-      socket.emit("alert", "hello " + socket.id);
-      sockets[socket.id] = 0;
+    SOCKETS[socket.id][data] += 1;
+    if (SOCKETS[socket.id][data] >= THRESHOLDS[data]) {
+      console.log("Threshold for <<" + data + ">> is met. Inform client!");
+      socket.emit("alert", "idle");
+      SOCKETS[socket.id][data] = 0;
+    }
+  });
+
+  socket.on("event", (data) => {
+    SOCKETS[socket.id][data] += 1;
+    SOCKETS[socket.id]["idle"] = 0;
+    if (SOCKETS[socket.id][data] >= THRESHOLDS[data]) {
+      console.log("Threshold for <<" + data + ">> is met. Inform client!");
+      socket.emit("alert", "press");
+      SOCKETS[socket.id][data] = 0;
     }
   });
 
   socket.on("disconnect", () => {
     console.log("Socket " + socket.id + " disconnected...");
-    sockets[socket.id] = undefined;
+    SOCKETS[socket.id] = undefined;
   });
 });
