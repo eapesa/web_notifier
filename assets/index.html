@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="assets/styles/style.css" />
 </head>
 <script src = "/socket.io/socket.io.js"></script>
 <script src="assets/js/jquery.js"></script>
@@ -10,8 +11,7 @@
   socket.on("connect", () => {
     socketId = socket.id;
     setInterval(() => {
-      console.log("Keep Alive");
-      socket.emit("keepalive", socketId)
+      socket.emit("keepalive", "idle");
     }, 1000);
   });
 
@@ -21,20 +21,39 @@
   });
 
   socket.on("alert", (data) => {
-    console.log(data);
-    $(".message").text("You seem to be inactive.. Are you encountering any problems?");
+    let popUpMessage;
+    if (data === "idle") {
+      popUpMessage = "You seem to be inactive.. Are you encountering any problems with the app?";
+    } else if (data === "press") {
+      popUpMessage = "Having fun pressing the button? :)";
+    } else {
+      popUpMessage = "";
+    }
+
+    $(".popup-message").text("You seem to be inactive.. Are you encountering any problems?");
     setTimeout(() => {
-      $(".message").text("");
+      $(".popup-message").text("");
     }, 2000);
+  });
+
+  $(document).ready(() => {
+    $(".btn-action").on("click", () => {
+      console.log("BUTTON IS PRESSED!");
+      socket.emit("event", "press");
+    });
   });
 </script>
 <body>
   <div class="header">
     <div class="header-title">Web Application Notifier</div>
+    <div class="header-desc">All this application do is monitor your behavior</div>
+    <div class="header-div"></div>
   </div>
   <div class="body">
-    <div class="message"></div>
     <button class="btn-action">CLICK ME!</button>
+  </div>
+  <div class="popup">
+    <div class="popup-message"></div>
   </div>
 </body>
 </html>
