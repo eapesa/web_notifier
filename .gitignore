@@ -81,4 +81,3 @@ typings/
 ### Start of custom ###
 .DS_Store
 dist/
-config.js
