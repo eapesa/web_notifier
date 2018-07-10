@@ -32,7 +32,6 @@ io.on("connection", (socket) => {
   };
 
   const THRESHOLDS = config.threshold;
-  console.log(THRESHOLDS);
   socket.on("keepalive", (data) => {
     SOCKETS[socket.id][data] += 1;
     if (SOCKETS[socket.id][data] >= THRESHOLDS[data]) {
