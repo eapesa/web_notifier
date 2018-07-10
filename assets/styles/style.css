@@ -20,6 +20,40 @@ body {
   font-family: 'Roboto';
 }
 
+.hidden {
+  display: none;
+}
+
+.show {
+  -webkit-animation: fadein 0.5s 10s;
+  animation: fadein 0.5s 10s;
+}
+
+.hide {
+  -webkit-animation: fadeout 2s;
+  animation: fadeout 2s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 10%; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 10%; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 10%; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 10%; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
 .header {
   height: 120px;
   width: 100%;
@@ -70,4 +104,36 @@ button:hover {
 .btn-action {
   height: 64px;
   width: 128px;
+}
+
+.popup {
+  visibility: visible;
+  min-height: 60px;
+  width: 350px;
+  position: fixed;
+  bottom: 10%;
+  left: 0%;
+  margin-left: 20px;
+  font-size: 16px;
+  line-height: 60px;
+  text-align: center;
+  background-color: aliceblue;
+  color: grey;
+}
+
+.popup-close {
+  width: 25px;
+  height: 25px;
+  background: url("../img/x-96.png");
+  background-size: 25px auto;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: lightgrey;
+  border: solid 1px lightgrey;
+  border-radius: 50%;
+}
+
+.popup-message {
+
 }

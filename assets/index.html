@@ -30,16 +30,23 @@
       popUpMessage = "";
     }
 
-    $(".popup-message").text("You seem to be inactive.. Are you encountering any problems?");
-    setTimeout(() => {
-      $(".popup-message").text("");
-    }, 2000);
+    $(".popup").removeClass("hidden")
+      .appendTo("popup-container")
+      .removeClass("hidden")
+      .addClass("show")
+      .children().text(popUpMessage);
   });
 
   $(document).ready(() => {
     $(".btn-action").on("click", () => {
       console.log("BUTTON IS PRESSED!");
       socket.emit("event", "press");
+    });
+
+    $(".popup-close").on("click", () => {
+      console.log("CLOSING!");
+      $(".popup").removeClass("show");
+      $(".popup").addClass("hidden");
     });
   });
 </script>
@@ -52,8 +59,10 @@
   <div class="body">
     <button class="btn-action">CLICK ME!</button>
   </div>
-  <div class="popup">
-    <div class="popup-message"></div>
+  <div class="popup-container"></div>
+  <div class="popup hidden">
+    <div class="popup-close"></div>
+    <div class="popup-message">Hello world!</div>
   </div>
 </body>
 </html>
