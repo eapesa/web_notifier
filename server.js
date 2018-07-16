@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
   socket.on("keepalive", (data) => {
     SOCKETS[socket.id][data] += 1;
     if (SOCKETS[socket.id][data] >= THRESHOLDS[data]) {
-      console.log("Threshold for <<" + data + ">> is met. Inform client!");
+      console.log("Threshold for keepalive = <<" + data + ">> is met. Inform client!");
       socket.emit("alert", "idle");
       SOCKETS[socket.id][data] = 0;
     }
@@ -45,7 +45,7 @@ io.on("connection", (socket) => {
     SOCKETS[socket.id][data] += 1;
     SOCKETS[socket.id]["idle"] = 0;
     if (SOCKETS[socket.id][data] >= THRESHOLDS[data]) {
-      console.log("Threshold for <<" + data + ">> is met. Inform client!");
+      console.log("Threshold for event = <<" + data + ">> is met. Inform client!");
       socket.emit("alert", "press");
       SOCKETS[socket.id][data] = 0;
     }
