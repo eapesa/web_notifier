@@ -2,9 +2,11 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="assets/styles/style.css" />
+  <link rel="stylesheet" type="text/css" href="assets/styles/jquery.toastmessage.css" />
 </head>
 <script src = "/socket.io/socket.io.js"></script>
 <script src="assets/js/jquery.js"></script>
+<script src="assets/js/jquery.toastmessage.js"></script>
 <script>
   let socket = io.connect("http://localhost:8000");
   let socketId;
@@ -30,11 +32,15 @@
       popUpMessage = "";
     }
 
-    $(".popup").removeClass("hidden")
-      .appendTo("popup-container")
-      .removeClass("hidden")
-      .addClass("show")
-      .children().text(popUpMessage);
+    $().toastmessage("showToast", {
+      text: popUpMessage,
+      position: "bottom-left",
+      stayTime: 3000,
+      inEffectDuration: 500,
+      type: "notice",
+      closeText: "",
+      stack: 4
+    });
   });
 
   $(document).ready(() => {
@@ -43,10 +49,11 @@
       socket.emit("event", "press");
     });
 
-    $(".popup-close").on("click", () => {
+    $(".popup-container").on("click", ".popup-close", () => {
       console.log("CLOSING!");
-      $(".popup").removeClass("show");
-      $(".popup").addClass("hidden");
+      console.log($(this).attr("id"));
+      console.log($(this).data("parent-id"));
+      $(this).children().remove();
     });
   });
 </script>
@@ -59,10 +66,10 @@
   <div class="body">
     <button class="btn-action">CLICK ME!</button>
   </div>
-  <div class="popup-container"></div>
-  <div class="popup hidden">
-    <div class="popup-close"></div>
-    <div class="popup-message">Hello world!</div>
+  <div class="popup-container" id="container"></div>
+  <div class="popup-clone hidden">
+    <div class="popup-close" id="close"></div>
+    <div class="popup-message" id="message">Hello world!</div>
   </div>
 </body>
 </html>

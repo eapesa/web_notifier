@@ -84,7 +84,7 @@ body {
 }
 
 .body {
-  height: 120px;
+  min-height: 256px;
   width: 100%;
   text-align: center;
 }
@@ -106,19 +106,20 @@ button:hover {
   width: 128px;
 }
 
-.popup {
+.popup, .popup-clone {
   visibility: visible;
-  min-height: 60px;
+  min-height: 40px;
   width: 350px;
   position: fixed;
   bottom: 10%;
   left: 0%;
   margin-left: 20px;
   font-size: 16px;
-  line-height: 60px;
   text-align: center;
   background-color: aliceblue;
   color: grey;
+  padding: 12px;
+  line-height: middle;
 }
 
 .popup-close {
@@ -135,5 +136,6 @@ button:hover {
 }
 
 .popup-message {
-
+  width: 100%;
+  word-wrap: break-word;
 }
