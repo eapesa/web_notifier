@@ -35,7 +35,7 @@
     $().toastmessage("showToast", {
       text: popUpMessage,
       position: "bottom-left",
-      stayTime: 3000,
+      stayTime: 30000,
       inEffectDuration: 500,
       type: "notice",
       closeText: "",
@@ -45,15 +45,7 @@
 
   $(document).ready(() => {
     $(".btn-action").on("click", () => {
-      console.log("BUTTON IS PRESSED!");
       socket.emit("event", "press");
-    });
-
-    $(".popup-container").on("click", ".popup-close", () => {
-      console.log("CLOSING!");
-      console.log($(this).attr("id"));
-      console.log($(this).data("parent-id"));
-      $(this).children().remove();
     });
   });
 </script>
@@ -65,11 +57,6 @@
   </div>
   <div class="body">
     <button class="btn-action">CLICK ME!</button>
-  </div>
-  <div class="popup-container" id="container"></div>
-  <div class="popup-clone hidden">
-    <div class="popup-close" id="close"></div>
-    <div class="popup-message" id="message">Hello world!</div>
   </div>
 </body>
 </html>
