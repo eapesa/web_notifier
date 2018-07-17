@@ -1,44 +1,54 @@
 .toast-container {
-	width: 280px;
+	/* width: 280px; */
+	width: 360px;
 	z-index: 9999;
 }
 
 
 * html .toast-container {
-	position: absolute;		
+	position: absolute;
 }
- 
+
 .toast-item {
 	height: auto;
-	background: #333;
-    opacity: 0.9;
+	/* background: #333; */
+	/* background: #d3d3d3; */
+  opacity: 0.9;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
-	color: #eee;
+	/* color: #eee; */
 	padding-top: 20px;
 	padding-bottom: 20px;
 	padding-left: 6px;
 	padding-right: 6px;
-	font-family: lucida Grande;
+	/* font-family: lucida Grande; */
+	font-family: 'Roboto';
 	font-size: 14px;
-	border: 2px solid #999;
+	/* border: 2px solid #999; */
 	display: block;
 	position: relative;
-	margin: 0 0 12px 0;
+	margin: 0 0 12px 12px;
+	/* Custom additions */
+	letter-spacing: 1;
 }
 
 .toast-item p {
     text-align: left;
     margin-left: 50px;
+		/* Custom additions */
+		line-height: auto;
 }
 
 .toast-item-close {
-    background:url(../images/close.gif);
+    /* background:url(../images/close.gif); */
+		background: url("../images/x-96.png");
     width:22px;
     height:22px;
     position: absolute;
     top:7px;
     right:7px;
+		/* Custom additions */
+		background-size: 22px 22px;
 }
 
 .toast-item-image {
@@ -48,56 +58,85 @@
     margin-top: 10px;
     margin-right: 10px;
     float:left;
+		/* Custom additions */
 }
 
 .toast-item-image-notice {
-    background:url(../images/notice.png);
+    /* background:url(../images/notice.png); */
+		/* Custom additions */
+		background:url(../images/notice.png) no-repeat 10px 50%;
+		background-position: center;
 }
 
 .toast-item-image-success {
-    background:url(../images/success.png);
+    /* background:url(../images/success.png); */
+		/* Custom additions */
+		background:url(../images/success.png) no-repeat 10px 50%;
+		background-position: center;
 }
 
 .toast-item-image-warning {
-    background:url(../images/warning.png);
+    /* background:url(../images/warning.png); */
+		/* Custom additions */
+		background:url(../images/warning.png) no-repeat 10px 50%;
+		background-position: center;
 }
 
 .toast-item-image-error {
-    background:url(../images/error.png);
+    /* background:url(../images/error.png); */
+		/* Custom additions */
+		background:url(../images/error.png) no-repeat 0% 50%;
+		background-position: center;
 }
 
 
-/** 
- * toast types 
- * 
+/**
+ * toast types
+ *
  * pattern: toast-type-[value]
  * where 'value' is the real value of the plugin option 'type'
- * 
+ *
  */
 .toast-type-notice {
-    color: white;    
+    /* color: white; */
+		/* Custom additions */
+		color: #555;
+		background-color: #e3f7fc;
+		border: 1px solid #8ed9f6;
 }
 
 .toast-type-success {
-    color: white;    
+    /* color: white; */
+		/* Custom additions */
+		color: #555;
+		background-color: #e9ffd9;
+		border: 1px solid #a6ca8a;
 }
 
 .toast-type-warning {
-    color: white;
-    border-color: #FCBD57;
+    /* color: white; */
+    /* border-color: #FCBD57; */
+		/* Custom additions */
+		color: #555;
+		background-color: #fff8c4;
+		border: 1px solid #f2c779;
 }
 
 .toast-type-error {
-    color: white;
-    border-color: #B32B2B;
+    /* color: white; */
+    /* border-color: #B32B2B; */
+		/* Custom additions */
+		color: #555;
+		background-color: #ffecec;
+		border: 1px solid #f5aca6;
 }
 
-/** 
- * positions 
- * 
+/**
+ * positions
+ *
  * pattern: toast-position-[value]
  * where 'value' is the real value of the plugin option 'position'
- * 
+ *
  */
 .toast-position-top-right {
     position: fixed;
